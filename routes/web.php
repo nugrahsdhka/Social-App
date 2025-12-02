@@ -4,6 +4,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -17,10 +18,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     // Opsional: Redirect dashboard langsung ke chat
-    return redirect()->route('chat.index');
+    return redirect()->route('home.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
     
     // --- FITUR CHAT & FOLLOW ---
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');

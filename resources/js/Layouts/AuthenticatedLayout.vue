@@ -96,6 +96,10 @@ onMounted(() => {
 
                             <!-- Desktop Nav Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('home.index')" :active="route().current('home.index')">
+                                    Home
+                                </NavLink>
+
                                 <NavLink :href="route('chat.index')" :active="route().current('chat.index')">
                                     Chat
                                 </NavLink>
@@ -145,6 +149,16 @@ onMounted(() => {
                 <div class="flex justify-around items-center h-16">
                     
                     <!-- Chat -->
+                    <Link 
+                        :href="route('home.index')" 
+                        :class="route().current('home.index') ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'"
+                        class="p-2 flex flex-col items-center justify-center w-full h-full"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>  
+                    </Link>
+                    
                     <Link 
                         :href="route('chat.index')" 
                         :class="route().current('chat.index') ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'"
