@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,19 +16,30 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    // Opsional: Redirect dashboard langsung ke chat
+    return redirect()->route('chat.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+    
+    // --- FITUR CHAT & FOLLOW ---
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/search', [ChatController::class, 'search'])->name('chat.search');
+    Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
+    Route::post('/chat/follow', [ChatController::class, 'follow'])->name('chat.follow');
+    
+    // --- FITUR PROFIL INSTAGRAM ---
+    // Ini yang tadi KURANG. Route untuk melihat profil orang lain/diri sendiri
+    Route::get('/p/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
+
+    // --- FITUR BAWAAN BREEZE (EDIT PROFIL) ---
+    // Ini wajib ada agar tombol "Edit Profile" tidak error
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
-    Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
-    Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
+    
+    // Route chat detail (ditaruh paling bawah agar tidak menabrak route lain)
+    Route::get('/chat/{user}', [ChatController::class, 'show'])->name('chat.show');
 });
 
 require __DIR__.'/auth.php';

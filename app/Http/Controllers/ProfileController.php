@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +14,32 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
+    // ==========================================
+    // BAGIAN 1: FITUR PROFIL INSTAGRAM (BARU)
+    // ==========================================
+    
+    public function show(User $user)
+    {
+        $currentUser = Auth::user();
+        
+        // Hitung jumlah follower, following, dan posts
+        $user->loadCount(['followers', 'following', 'posts']);
+
+        $isCurrentUserProfile = $currentUser->id === $user->id;
+        $isFollowing = $currentUser->isFollowing($user->id);
+
+        return Inertia::render('Profile/Show', [
+            'user' => $user,
+            'isCurrentUserProfile' => $isCurrentUserProfile,
+            'isFollowing' => $isFollowing,
+        ]);
+    }
+
+    // ==========================================
+    // BAGIAN 2: FITUR EDIT PROFIL (BAWAAN BREEZE)
+    // ==========================================
+    // Error Anda terjadi karena bagian ini hilang
+    
     /**
      * Display the user's profile form.
      */
