@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
 import { Head } from '@inertiajs/vue3';
 
 defineProps({
@@ -53,7 +54,20 @@ defineProps({
                     <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-500 to-orange-500"></div>
                     <DeleteUserForm class="max-w-xl" />
                 </div>
-                
+
+                <!-- 4. Logout Mobile -->
+                <div class="bg-white/60 dark:bg-gray-900/60 backdrop-blur-2xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-6 md:p-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-500 to-orange-500"></div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <div class="rounded-2xl">
+                            <DropdownLink :href="route('logout')" method="post" as="button">
+                                Log Out
+                            </DropdownLink>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </AuthenticatedLayout>

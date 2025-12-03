@@ -55,19 +55,6 @@ defineProps({
                 </div>
             </div>
 
-            <!-- Title with Gradient Animation -->
-            <div class="mb-6">
-                <h1 class="text-5xl md:text-7xl font-black tracking-tight text-gray-900 dark:text-white mb-3 leading-tight">
-                    Selamat Datang di
-                </h1>
-                <div class="relative inline-block">
-                    <h2 class="text-6xl md:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 animate-gradient pb-2">
-                        76 Apel
-                    </h2>
-                    <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 rounded-full"></div>
-                </div>
-            </div>
-
             <!-- Action Buttons with Hover Effects -->
             <div v-if="canLogin" class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-8">
                 <template v-if="$page.props.auth.user">
@@ -79,23 +66,26 @@ defineProps({
                         <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition duration-300"></div>
                     </Link>
                 </template>
+                
 
                 <template v-else>
-                    <Link
-                        :href="route('login')"
-                        class="group relative w-full sm:w-auto px-10 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-center overflow-hidden"
-                    >
-                        <span class="relative z-10">Masuk</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition duration-300"></div>
-                    </Link>
-
-                    <Link
-                        v-if="canRegister"
-                        :href="route('register')"
-                        class="group w-full sm:w-auto px-10 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-700 font-bold rounded-2xl shadow-lg hover:shadow-xl hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 transform hover:-translate-y-2 text-center"
-                    >
-                        Daftar Sekarang
-                    </Link>
+                    <div class="flex flex-col gap-3">
+                        <Link
+                            :href="route('login')"
+                            class="group relative w-full sm:w-auto px-10 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-center overflow-hidden"
+                        >
+                            <span class="relative z-10">Masuk</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                        </Link>
+    
+                        <Link
+                            v-if="canRegister"
+                            :href="route('register')"
+                            class="group w-full sm:w-auto px-10 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-700 font-bold rounded-2xl shadow-lg hover:shadow-xl hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 transform hover:-translate-y-2 text-center"
+                        >
+                            Daftar Sekarang
+                        </Link>
+                    </div>
                 </template>
             </div>
         </div>

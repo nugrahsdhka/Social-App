@@ -35,14 +35,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    // ==========================================
-    // BAGIAN 2: FITUR EDIT PROFIL (BAWAAN BREEZE)
-    // ==========================================
-    // Error Anda terjadi karena bagian ini hilang
-    
-    /**
-     * Display the user's profile form.
-     */
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
